@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-parent">
+    <div class="container-secondly">
+        <h2 class="text-center">Add New Movie</h2>
+        {% for msg in messages %}
+        <h3 class="text-center" style=padding-top:10px;color:red;>
+            {{msg}}
+        </h3>
+
+        {% endfor %}
+        <form method=post enctype=multipart/form-data>
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Movie Name</label>
+                <div class="col-sm-10">
+                    <input name="movie_name" type="text" class="form-control" id="name" placeholder="Enter Movie name"
+                           required>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <textarea name="movie_description" rows="4" class="form-control" id="description"
+                              placeholder="Enter description" required></textarea>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group row">
+                <label for="movie_image" class="col-sm-2 col-form-label">Movie Image</label>
+                <div class="col-sm-10">
+                    <input name="movie_image" type="file" class="form-control" id="movie_image" placeholder="Username"
+                           required>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group row">
+                <label for="movie_number" class="col-sm-2 col-form-label">Year</label>
+                <div class="col-sm-10">
+                    <input name="movie_number" type="number" class="form-control" id="movie_number"
+                           placeholder="released year" required>
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group row">
+                <div class=" text-center">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
+{% endblock %}

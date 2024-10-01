@@ -1,0 +1,53 @@
+{% load static %}
+<div class="header">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <div class="container-fluid">
+            <!-- Brand Name -->
+            <div>
+                <h2 class="header1">MOVIE COLLECTIONS</h2>
+                {% if user.is_authenticated %}
+                <h4 class="greeting">Hi, {{ user.username }}!</h4>
+                {% else %}
+                <h4 class="greeting">Welcome, Guest!</h4>  <!-- Optional: greeting for unauthenticated users -->
+                {% endif %}
+            </div>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <!-- Home Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'movieapp:MyMovie' %}" id="homeButton">Home</a>
+                    </li>
+
+                    <!-- Register Link -->
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'movieapp:register' %}">Register</a>
+                    </li>
+                    {% else %}
+                    <!-- Add New Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'movieapp:AddMovie' %}">Add New</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                <!-- Login Button on the Right -->
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light" href="{% url 'movieapp:logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light" href="{% url 'movieapp:login' %}">Login</a>
+                    </li>
+
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+

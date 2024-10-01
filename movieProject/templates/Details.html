@@ -1,0 +1,45 @@
+{%   extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <!-- Product Image Section -->
+        <div class="col-lg-6 col-md-6 col-sm-12 text-center mb-4">
+            <div class="product-image" style="max-width: 400px; margin: 0 auto;">
+                {% if movie.images %}
+                <img class="card-img-top my_image"
+                     src="{{ movie.images.url }}"
+                     alt="{{ movie.name }}">
+                {% else %}
+                <img class="card-img-top my_image"
+                     src="{% static 'img/fail.jpg' %}"
+                     alt="{{ movie.name }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h1 class="my_pro_title">{{ movie.name }}</h1>
+            <p class="product-price text-success">
+                Released:{{ movie.year }}
+            </p>
+            <h5 class="my_title">Movie Description</h5>
+            <p class="text-justify my_pro_text">
+                {{ movie.desc  }}
+            </p>
+
+            {% if not user.is_authenticated %}
+            <p class="text-danger"><b>Login for Actions</b></p>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'movieapp:Update' movie.id %}">Update</a>
+            <a class="btn btn-secondary" href="{% url 'movieapp:Delete' movie.id %}">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
